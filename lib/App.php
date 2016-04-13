@@ -82,7 +82,8 @@
                     throw new MethodNotAllowed($route);
                 }
 
-                $route->injectCreator($this->creator)->callHook($httpHook, $response);
+                $route->injectCreator($this->creator)
+                    ->callHook($httpHook, $response);
             } catch (\Exception $e) {
                 if (!$e instanceof SlimmerException) {
                     $e = SlimmerException::convertFromGenericException($e);
