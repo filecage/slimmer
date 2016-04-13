@@ -10,6 +10,46 @@
         private $routes = [];
 
         /**
+         * @param string $routeIdentifier
+         * @param callable $handler
+         *
+         * @return Router
+         */
+        function registerGetHandler ($routeIdentifier, callable $handler) {
+            return $this->registerRoute($routeIdentifier, (new Route())->registerHook('http:get', $handler));
+        }
+
+        /**
+         * @param string $routeIdentifier
+         * @param callable $handler
+         *
+         * @return Router
+         */
+        function registerPostHandler ($routeIdentifier, callable $handler) {
+            return $this->registerRoute($routeIdentifier, (new Route())->registerHook('http:post', $handler));
+        }
+
+        /**
+         * @param string $routeIdentifier
+         * @param callable $handler
+         *
+         * @return Router
+         */
+        function registerPutHandler ($routeIdentifier, callable $handler) {
+            return $this->registerRoute($routeIdentifier, (new Route())->registerHook('http:put', $handler));
+        }
+
+        /**
+         * @param string $routeIdentifier
+         * @param callable $handler
+         *
+         * @return Router
+         */
+        function registerDeleteHandler ($routeIdentifier, callable $handler) {
+            return $this->registerRoute($routeIdentifier, (new Route())->registerHook('http:delete', $handler));
+        }
+
+        /**
          * @param $routeIdentifier
          * @param Route $route
          *
