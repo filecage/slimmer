@@ -3,6 +3,7 @@
     namespace Slimmer;
 
     use Creator\Creator;
+    use Slimmer\Exceptions\Http\MethodNotAllowed;
     use Slimmer\Exceptions\Http\NotImplemented;
     use Slimmer\Exceptions\SlimmerException;
     use Slimmer\Interfaces\ContentConverterInterface;
@@ -75,7 +76,12 @@
 
             try {
                 foreach ($this->router->getMatchingRoutes($this->request->getParameter('route')) as $route) {
-                    $route->injectCreator($this->creator)->callHook($this->getHttpHookByHttpMethod(), $response);
+                    $httpHook = $this->getHttpHookByHttpMethod();
+                    if (!$route->supportsHook($httpHook)) {
+                        throw new MethodNotAllowed;
+                    }
+
+                    $route->injectCreator($this->creator)->callHook($httpHook, $response);
                 }
             } catch (\Exception $e) {
                 if (!$e instanceof SlimmerException) {
