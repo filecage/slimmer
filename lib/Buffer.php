@@ -81,7 +81,7 @@
             } elseif (is_string($mergeContent) && is_string($this->content)) {
                 $this->content = $this->content . "\n" . $mergeContent;
             } else {
-                throw new \Exception('Unable to merge buffers, unmergeable buffer content types');
+                throw new \Exception('Unable to merge buffers, unmergeable buffer content types; please keep buffer writing consistent!');
             }
 
             return $this;
