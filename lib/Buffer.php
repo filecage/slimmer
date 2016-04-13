@@ -6,25 +6,25 @@
         /**
          * @var array
          */
-        protected $bufferContent;
+        protected $content;
 
         /**
          * @param string $key
          * @param mixed $value
          */
         function __set($key, $value) {
-            if (!isset($this->bufferContent)) {
-                $this->bufferContent = [];
+            if (!isset($this->content)) {
+                $this->content = [];
             }
 
-            $this->bufferContent[$key] = $value;
+            $this->content[$key] = $value;
         }
 
         /**
          * @return $this
          */
-        function clearBuffer () {
-            unset($this->bufferContent);
+        function clearContent () {
+            unset($this->content);
 
             return $this;
         }
@@ -34,8 +34,8 @@
          *
          * @return $this
          */
-        function setBufferContent ($bufferContent) {
-            $this->bufferContent = $bufferContent;
+        function setContent ($bufferContent) {
+            $this->content = $bufferContent;
 
             return $this;
         }
@@ -43,7 +43,7 @@
         /**
          * @return mixed
          */
-        function getBufferContent () {
-            return $this->bufferContent;
+        function getContent () {
+            return $this->content;
         }
     }
