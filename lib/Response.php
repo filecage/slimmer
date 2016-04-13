@@ -14,9 +14,13 @@
          */
         private $headerContainer;
 
-        function __construct() {
-            $this->buffer = new Buffer();
-            $this->headerContainer = new HeaderContainer();
+        /**
+         * @param Buffer $buffer
+         * @param HeaderContainer $headerContainer
+         */
+        function __construct($buffer = null, $headerContainer = null) {
+            $this->buffer = $buffer ?: new Buffer();
+            $this->headerContainer = $headerContainer ?: new HeaderContainer();
         }
 
         /**
