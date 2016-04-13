@@ -28,7 +28,7 @@
         /**
          * @param string $routeString
          *
-         * @return Route[]|null
+         * @return Route[]
          */
         function getMatchingRoutes ($routeString) {
             foreach ($this->routes as $routeIdentifier => $routes) {
@@ -37,7 +37,7 @@
                 }
             }
 
-            return null;
+            return [];
         }
-        
+
     }
