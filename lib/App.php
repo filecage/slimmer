@@ -3,6 +3,7 @@
     namespace Slimmer;
 
     use Creator\Creator;
+    use Slimmer\Interfaces\ContentConverterInterface;
 
     class App {
 
@@ -27,6 +28,11 @@
         private $response;
 
         /**
+         * @var ContentConverterInterface
+         */
+        private $contentConverter;
+
+        /**
          * @param Creator $creator
          */
         function __construct(Creator $creator = null) {
@@ -47,6 +53,17 @@
         }
 
         /**
+         * @param ContentConverterInterface $contentConverter
+         *
+         * @return $this
+         */
+        function setContentConverter (ContentConverterInterface $contentConverter) {
+            $this->contentConverter = $contentConverter;
+
+            return $this;
+        }
+
+        /**
          * @return Buffer
          */
         function run () {
@@ -54,7 +71,11 @@
                 $route->injectCreator($this->creator)->callHook($this->getHttpHookByHttpMethod(), $this->response);
             }
 
-            return $buffer;
+            if (isset($this->contentConverter)) {
+                $this->contentConverter->convert($this->response);
+            }
+
+            return $this;
         }
 
         /**
