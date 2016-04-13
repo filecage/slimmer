@@ -79,7 +79,7 @@
                 foreach ($this->router->getMatchingRoutes($this->request->getParameter('route')) as $route) {
                     $httpHook = $this->getHttpHookByHttpMethod();
                     if (!$route->supportsHook($httpHook)) {
-                        throw new MethodNotAllowed;
+                        throw new MethodNotAllowed($route);
                     }
 
                     $route->injectCreator($this->creator)->callHook($httpHook, $response);
