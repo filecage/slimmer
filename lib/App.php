@@ -69,8 +69,10 @@
          * @return Buffer
          */
         function run () {
+            $response = $this->response;
+
             foreach ($this->router->getMatchingRoutes($this->request->getParameter('route')) as $route) {
-                $route->injectCreator($this->creator)->callHook($this->getHttpHookByHttpMethod(), $this->response);
+                $route->injectCreator($this->creator)->callHook($this->getHttpHookByHttpMethod(), $response);
             }
 
             if (isset($this->contentConverter)) {
