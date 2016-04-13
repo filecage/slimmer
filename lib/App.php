@@ -3,6 +3,7 @@
     namespace Slimmer;
 
     use Creator\Creator;
+    use Slimmer\Exceptions\Http\NotImplemented;
     use Slimmer\Exceptions\SlimmerException;
     use Slimmer\Interfaces\ContentConverterInterface;
 
@@ -141,6 +142,6 @@
                 return 'http:delete';
             }
 
-            throw new \Exception('Bad Method');
+            throw new NotImplemented;
         }
     }

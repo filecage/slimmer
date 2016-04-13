@@ -2,6 +2,8 @@
 
     namespace Slimmer;
 
+    use Slimmer\Exceptions\Http\NotFound;
+
     class Router {
 
         /**
@@ -69,6 +71,7 @@
          * @param string $routeString
          *
          * @return Route[]
+         * @throws NotFound
          */
         function getMatchingRoutes ($routeString) {
             foreach ($this->routes as $routeIdentifier => $routes) {
@@ -77,7 +80,7 @@
                 }
             }
 
-            return [];
+            throw new NotFound;
         }
 
     }
