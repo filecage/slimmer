@@ -3,6 +3,7 @@
     namespace Slimmer;
 
     use Creator\Creator;
+    use Slimmer\Exceptions\SlimmerException;
     use Slimmer\Interfaces\ContentConverterInterface;
 
     class App {
@@ -71,15 +72,23 @@
         function run () {
             $response = $this->response;
 
-            foreach ($this->router->getMatchingRoutes($this->request->getParameter('route')) as $route) {
-                $route->injectCreator($this->creator)->callHook($this->getHttpHookByHttpMethod(), $response);
+            try {
+                foreach ($this->router->getMatchingRoutes($this->request->getParameter('route')) as $route) {
+                    $route->injectCreator($this->creator)->callHook($this->getHttpHookByHttpMethod(), $response);
+                }
+            } catch (\Exception $e) {
+                if (!$e instanceof SlimmerException) {
+                    $e = SlimmerException::convertFromGenericException($e);
+                }
+
+                $response = $e->getExceptionResponse();
             }
 
             if (isset($this->contentConverter)) {
-                $this->contentConverter->convert($this->response);
+                $this->contentConverter->convert($response);
             }
 
-            $this->setHeaders($this->response->getHeaderContainer())->setContent($this->response->getBuffer());
+            $this->setHeaders($response->getHeaderContainer())->setContent($response->getBuffer());
 
             return $this;
         }
