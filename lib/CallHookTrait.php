@@ -60,7 +60,7 @@
             }
 
             foreach ($this->registeredHooks[$hook] as $hookCallable) {
-                $buffer = $this->callHookWithCallable($hookCallable, $response);
+                $this->callHookWithCallable($hookCallable, $response);
             }
 
             return $response;
