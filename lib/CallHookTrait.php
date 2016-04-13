@@ -59,7 +59,7 @@
                 return null;
             }
 
-            foreach ($this->registeredHooks as $hookCallable) {
+            foreach ($this->registeredHooks[$hook] as $hookCallable) {
                 $buffer = $this->callHookWithCallable($hookCallable, $buffer);
             }
 
