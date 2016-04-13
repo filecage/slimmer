@@ -76,14 +76,13 @@
             $response = $this->response;
 
             try {
-                foreach ($this->router->getMatchingRoutes($this->request->getParameter('route')) as $route) {
-                    $httpHook = $this->getHttpHookByHttpMethod();
-                    if (!$route->supportsHook($httpHook)) {
-                        throw new MethodNotAllowed($route);
-                    }
-
-                    $route->injectCreator($this->creator)->callHook($httpHook, $response);
+                $route = $this->router->getMatchingRoute($this->request->getParameter('route'));
+                $httpHook = $this->getHttpHookByHttpMethod();
+                if (!$route->supportsHook($httpHook)) {
+                    throw new MethodNotAllowed($route);
                 }
+
+                $route->injectCreator($this->creator)->callHook($httpHook, $response);
             } catch (\Exception $e) {
                 if (!$e instanceof SlimmerException) {
                     $e = SlimmerException::convertFromGenericException($e);
