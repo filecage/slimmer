@@ -1,0 +1,16 @@
+{
+    "name": "tholabs/slimmer",
+    "description": "PHP nano-framework",
+    "authors": [
+        {
+            "name": "David Beuchert",
+            "email": "mail@dbeuchert.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Slimmer\\": "lib/"
+        }
+    }
+}
