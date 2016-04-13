@@ -3,10 +3,20 @@
     namespace Slimmer;
 
     class Buffer {
+
         /**
          * @var array
          */
         protected $content;
+
+        /**
+         * @param mixed $content
+         */
+        function __construct($content = null) {
+            if ($content) {
+                $this->content = $content;
+            }
+        }
 
         /**
          * @param string $key
