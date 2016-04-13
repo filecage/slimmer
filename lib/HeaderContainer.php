@@ -23,7 +23,14 @@
         /**
          * @var int
          */
-        private $status = self::HTTP_STATUS_SUCCESS;
+        private $status;
+
+        /**
+         * @param int $status
+         */
+        function __construct($status = self::HTTP_STATUS_SUCCESS) {
+            $this->status = $status;
+        }
 
         /**
          * @param string $contentType
