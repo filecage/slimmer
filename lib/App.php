@@ -35,7 +35,7 @@
         /**
          * @param Creator $creator
          */
-        function __construct(Creator $creator = null) {
+        function __construct (Creator $creator = null) {
             $this->creator = $creator ?: new Creator();
             $this->router = $this->creator->create(Router::class);
             $this->request = new Request($_REQUEST, $_SERVER);
