@@ -50,9 +50,8 @@
          * @return Buffer
          */
         function run () {
-            $buffer = new Buffer();
             foreach ($this->router->getMatchingRoutes($this->request->getParameter('route')) as $route) {
-                $route->injectCreator($this->creator)->callHook($this->getHttpHookByHttpMethod(), $buffer);
+                $route->injectCreator($this->creator)->callHook($this->getHttpHookByHttpMethod(), $this->response);
             }
 
             return $buffer;

@@ -18,17 +18,17 @@
 
         /**
          * @param string $hook
-         * @param Buffer $buffer
+         * @param Response $response
          *
-         * @return Buffer
+         * @return Response
          * @throws \Exception
          */
-        function callHook($hook, Buffer $buffer) {
-            if ($this->callHookFromRegistry($hook, $buffer) === null) {
-                $this->callHookFromClassBody($hook, $buffer);
+        function callHook($hook, Response $response) {
+            if ($this->callHookFromRegistry($hook, $response) === null) {
+                $this->callHookFromClassBody($hook, $response);
             }
 
-            return $buffer;
+            return $response;
         }
 
         /**
@@ -49,50 +49,54 @@
 
         /**
          * @param string $hook
-         * @param Buffer $buffer
+         * @param Response $response
          *
-         * @return Buffer
+         * @return Response
          * @throws \Exception
          */
-        private function callHookFromRegistry ($hook, Buffer $buffer) {
+        private function callHookFromRegistry ($hook, Response $response) {
             if (!isset($this->registeredHooks[$hook])) {
                 return null;
             }
 
             foreach ($this->registeredHooks[$hook] as $hookCallable) {
-                $buffer = $this->callHookWithCallable($hookCallable, $buffer);
+                $buffer = $this->callHookWithCallable($hookCallable, $response);
             }
 
-            return $buffer;
+            return $response;
         }
 
         /**
          * @param string $hook
-         * @param Buffer $buffer
+         * @param Response $response
          *
          * @return $this|null
          */
-        private function callHookFromClassBody ($hook, Buffer $buffer) {
+        private function callHookFromClassBody ($hook, Response $response) {
             $hookMethodName = sprintf('%sHook', $hook);
             if (!method_exists($this, $hookMethodName)) {
                 return null;
             }
 
-            return $this->callHookWithCallable([$this, $hookMethodName], $buffer);
+            return $this->callHookWithCallable([$this, $hookMethodName], $response);
         }
 
         /**
          * @param callable $hookCallable
-         * @param Buffer $buffer
+         * @param Response $response
          *
          * @return $this
          * @throws \Exception
          */
-        private function callHookWithCallable (callable $hookCallable, Buffer $buffer) {
-            $hookInvokable = $this->getCreator()->invokeInjected($hookCallable)->with($buffer);
-            $hookResult = new Buffer($hookInvokable->invoke());
+        private function callHookWithCallable (callable $hookCallable, Response $response) {
+            $hookInvokable = $this->getCreator()
+                ->invokeInjected($hookCallable)
+                ->with($response)
+                ->with($response->getBuffer());
 
-            return $buffer->mergeContents($hookResult);
+            $hookResultBuffer = new Buffer($hookInvokable->invoke());
+
+            return $response->getBuffer()->mergeContents($hookResultBuffer);
         }
 
     }

@@ -1,17 +1,17 @@
 <?php
 
     namespace Slimmer\Interfaces;
-
-    use Slimmer\Buffer;
+    
+    use Slimmer\Response;
 
     interface Hookable {
 
         /**
          * @param $hook
-         * @param Buffer $buffer
+         * @param Response $buffer
          *
          * @return mixed
          */
-        function callHook($hook, Buffer $buffer);
+        function callHook($hook, Response $buffer);
 
     }
