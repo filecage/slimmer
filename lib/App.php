@@ -7,6 +7,7 @@
     use Slimmer\Exceptions\Http\NotImplemented;
     use Slimmer\Exceptions\SlimmerException;
     use Slimmer\Interfaces\ContentConverterInterface;
+    use Slimmer\Interfaces\Hookable;
 
     class App {
 
@@ -144,13 +145,13 @@
          */
         private function getHttpHookByHttpMethod () {
             if ($this->request->isGet()) {
-                return 'http:get';
+                return Hookable::HOOK_HTTP_GET;
             } elseif ($this->request->isPost()) {
-                return 'http:post';
+                return Hookable::HOOK_HTTP_POST;
             } elseif ($this->request->isPut()) {
-                return 'http:put';
+                return Hookable::HOOK_HTTP_PUT;
             } elseif ($this->request->isDelete()) {
-                return 'http:delete';
+                return Hookable::HOOK_HTTP_DELETE;
             }
 
             throw new NotImplemented;

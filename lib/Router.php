@@ -3,6 +3,7 @@
     namespace Slimmer;
 
     use Slimmer\Exceptions\Http\NotFound;
+    use Slimmer\Interfaces\Hookable;
 
     class Router {
 
@@ -18,7 +19,7 @@
          * @return Router
          */
         function registerGetHandler ($routeIdentifier, callable $handler) {
-            return $this->registerRoute($routeIdentifier, (new Route())->registerHook('http:get', $handler));
+            return $this->registerRoute($routeIdentifier, (new Route())->registerHook(Hookable::HOOK_HTTP_GET, $handler));
         }
 
         /**
@@ -28,7 +29,7 @@
          * @return Router
          */
         function registerPostHandler ($routeIdentifier, callable $handler) {
-            return $this->registerRoute($routeIdentifier, (new Route())->registerHook('http:post', $handler));
+            return $this->registerRoute($routeIdentifier, (new Route())->registerHook(Hookable::HOOK_HTTP_POST, $handler));
         }
 
         /**
@@ -38,7 +39,7 @@
          * @return Router
          */
         function registerPutHandler ($routeIdentifier, callable $handler) {
-            return $this->registerRoute($routeIdentifier, (new Route())->registerHook('http:put', $handler));
+            return $this->registerRoute($routeIdentifier, (new Route())->registerHook(Hookable::HOOK_HTTP_PUT, $handler));
         }
 
         /**
@@ -48,7 +49,7 @@
          * @return Router
          */
         function registerDeleteHandler ($routeIdentifier, callable $handler) {
-            return $this->registerRoute($routeIdentifier, (new Route())->registerHook('http:delete', $handler));
+            return $this->registerRoute($routeIdentifier, (new Route())->registerHook(Hookable::HOOK_HTTP_DELETE, $handler));
         }
 
         /**
