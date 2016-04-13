@@ -80,15 +80,19 @@
                 if (!$e instanceof SlimmerException) {
                     $e = SlimmerException::convertFromGenericException($e);
                 }
-
                 $response = $e->getExceptionResponse();
             }
 
+            return $this->send($response);
+        }
+
+        protected function send(Response $response) {
             if (isset($this->contentConverter)) {
                 $this->contentConverter->convert($response);
             }
 
-            $this->setHeaders($response->getHeaderContainer())->setContent($response->getBuffer());
+            $this->setHeaders($response->getHeaderContainer())
+                ->setContent($response->getBuffer());
 
             return $this;
         }
