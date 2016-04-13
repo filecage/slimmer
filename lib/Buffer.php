@@ -53,4 +53,27 @@
         function getContent () {
             return $this->content;
         }
+
+        /**
+         * @param Buffer $mergeBuffer
+         *
+         * @return $this
+         * @throws \Exception
+         */
+        function mergeContents (Buffer $mergeBuffer) {
+            if (!$mergeBuffer->hasContent()) {
+                return $this;
+            }
+
+            $mergeContent = $mergeBuffer->getContent();
+            if (is_array($mergeContent) && is_array($this->content)) {
+                $this->content = array_merge($mergeContent, $this->content);
+            } elseif (is_string($mergeContent) && is_string($this->content)) {
+                $this->content = $this->content . "\n" . $mergeContent;
+            } else {
+                throw new \Exception('Unable to merge buffers, unmergeable buffer content types');
+            }
+
+            return $this;
+        }
     }
