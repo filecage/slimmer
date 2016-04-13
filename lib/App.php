@@ -75,6 +75,35 @@
                 $this->contentConverter->convert($this->response);
             }
 
+            $this->setHeaders($this->response->getHeaderContainer())->setContent($this->response->getBuffer());
+
+            return $this;
+        }
+
+        /**
+         * @param HeaderContainer $headerContainer
+         *
+         * @return $this
+         */
+        protected function setHeaders (HeaderContainer $headerContainer) {
+            foreach ($headerContainer->getHeaders() as $header => $value) {
+                header(sprintf('%s: %s', $header, $value));
+            }
+
+            return $this;
+        }
+
+        /**
+         * @param Buffer $buffer
+         *
+         * @return $this
+         */
+        protected function setContent (Buffer $buffer) {
+            $content = $buffer->getContent();
+            if (is_string($content) && !empty($content)) {
+                echo $content;
+            }
+
             return $this;
         }
 
