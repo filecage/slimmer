@@ -87,6 +87,11 @@
             return $this->send($response);
         }
 
+        /**
+         * @param Response $response
+         *
+         * @return $this
+         */
         protected function send(Response $response) {
             if (isset($this->contentConverter)) {
                 $this->contentConverter->convert($response);
