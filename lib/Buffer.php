@@ -41,6 +41,13 @@
         }
 
         /**
+         * @return bool
+         */
+        function hasContent () {
+            return isset($this->content);
+        }
+
+        /**
          * @return mixed
          */
         function getContent () {
