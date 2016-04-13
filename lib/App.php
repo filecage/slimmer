@@ -40,6 +40,7 @@
             $this->router = $this->creator->create(Router::class);
             $this->request = new Request($_REQUEST, $_SERVER);
             $this->response = new Response();
+            $this->contentConverter = new JsonContentConverter();
 
             $this->creator->registerClassResource($this->request);
             $this->creator->registerClassResource($this->response);
