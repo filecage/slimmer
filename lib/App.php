@@ -94,6 +94,8 @@
                 header(sprintf('%s: %s', $header, $value));
             }
 
+            http_send_status($headerContainer->getStatus());
+
             return $this;
         }
 
