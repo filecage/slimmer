@@ -8,7 +8,10 @@
 
         function convert (Response $response) {
             $buffer = $response->getBuffer();
-            $buffer->setContent(json_encode($buffer->getContent()));
+            if ($buffer->hasContent()) {
+                $buffer->setContent(json_encode($buffer->getContent()));
+            }
+            
             $response->getHeaderContainer()->setContentType('application/json');
         }
 
