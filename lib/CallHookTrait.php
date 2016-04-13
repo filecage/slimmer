@@ -18,6 +18,15 @@
 
         /**
          * @param string $hook
+         *
+         * @return bool
+         */
+        function supportsHook ($hook) {
+            return (isset($this->registeredHooks[$hook]) || method_exists($this, $this->getHookMethodName($hook)));
+        }
+
+        /**
+         * @param string $hook
          * @param Response $response
          *
          * @return Response
@@ -73,12 +82,21 @@
          * @return $this|null
          */
         private function callHookFromClassBody ($hook, Response $response) {
-            $hookMethodName = sprintf('%sHook', $hook);
+            $hookMethodName = $this->getHookMethodName($hook);
             if (!method_exists($this, $hookMethodName)) {
                 return null;
             }
 
             return $this->callHookWithCallable([$this, $hookMethodName], $response);
+        }
+
+        /**
+         * @param string $hook
+         *
+         * @return mixed
+         */
+        private function getHookMethodName ($hook) {
+            return sprintf('%sHook', $hook);
         }
 
         /**
