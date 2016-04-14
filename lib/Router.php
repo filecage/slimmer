@@ -77,9 +77,9 @@
          * @throws NotFound
          */
         function getMatchingRoute ($routeString) {
-            foreach ($this->routes as $routeIdentifier => $routes) {
+            foreach ($this->routes as $routeIdentifier => $route) {
                 if ($routeString === $routeIdentifier || preg_match('/' . $routeIdentifier . '/', $routeString, $variables)) {
-                    return $routes;
+                    return $route;
                 }
             }
 
