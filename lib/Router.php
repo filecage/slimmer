@@ -78,7 +78,12 @@
          */
         function getMatchingRoute ($routeString) {
             foreach ($this->routes as $routeIdentifier => $route) {
-                if ($routeString === $routeIdentifier || preg_match('/' . $routeIdentifier . '/', $routeString, $variables)) {
+                $routeIdentifier = new RouteIdentifier($routeIdentifier);
+
+                if ($routeString === $routeIdentifier || preg_match('/' . $routeIdentifier->getRegularExpression() . '/', $routeString, $variables)) {
+                    if (isset($variables)) {
+                        $arguments = array_combine($routeIdentifier->getArguments(), array_slice($variables, 1));
+                    }
                     return $route;
                 }
             }
