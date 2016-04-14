@@ -7,7 +7,7 @@
     class JsonContentConverter implements ContentConverterInterface {
 
         function convert (Response $response) {
-            $buffer = $response->getBuffer();
+            $buffer = $response->getBody();
             if ($buffer->hasContent()) {
                 $buffer->setContent(json_encode($buffer->getContent()));
             }

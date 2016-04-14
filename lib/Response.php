@@ -7,7 +7,7 @@
         /**
          * @var Buffer
          */
-        private $buffer;
+        private $body;
 
         /**
          * @var HeaderContainer
@@ -15,19 +15,19 @@
         private $headerContainer;
 
         /**
-         * @param Buffer $buffer
+         * @param Buffer $body
          * @param HeaderContainer $headerContainer
          */
-        function __construct($buffer = null, $headerContainer = null) {
-            $this->buffer = $buffer ?: new Buffer();
+        function __construct($body = null, $headerContainer = null) {
+            $this->body = $body ?: new Buffer();
             $this->headerContainer = $headerContainer ?: new HeaderContainer();
         }
 
         /**
          * @return Buffer
          */
-        function getBuffer () {
-            return $this->buffer;
+        function getBody () {
+            return $this->body;
         }
 
         /**

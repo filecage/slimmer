@@ -105,7 +105,7 @@
             }
 
             $this->setHeaders($response->getHeaderContainer())
-                ->setContent($response->getBuffer());
+                ->setContent($response->getBody());
 
             return $this;
         }

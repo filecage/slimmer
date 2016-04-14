@@ -110,11 +110,11 @@
             $hookInvokable = $this->getCreator()
                 ->invokeInjected($hookCallable)
                 ->with($response)
-                ->with($response->getBuffer());
+                ->with($response->getBody());
 
             $hookResultBuffer = new Buffer($hookInvokable->invoke());
 
-            return $response->getBuffer()->mergeContents($hookResultBuffer);
+            return $response->getBody()->mergeContents($hookResultBuffer);
         }
 
     }
