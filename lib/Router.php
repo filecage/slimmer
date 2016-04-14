@@ -83,7 +83,6 @@
                 if ($this->isDirectMatch($routeString, $routeIdentifier) || preg_match('/' . $routeIdentifier->getRegularExpression() . '/', $routeString, $variables)) {
                     if (isset($variables)) {
                         $arguments = array_combine($routeIdentifier->getArguments(), array_slice($variables, 1));
-                        var_dump($arguments);
                     }
                     return $route;
                 }
