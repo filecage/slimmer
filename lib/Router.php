@@ -80,7 +80,7 @@
             foreach ($this->routes as $routeIdentifier => $route) {
                 $routeIdentifier = new RouteIdentifier($routeIdentifier);
 
-                if ($this->isDirectMatch($routeString, $routeIdentifier) || preg_match('/' . $routeIdentifier->getRegularExpression() . '/', $routeString, $variables)) {
+                if ($this->isDirectMatch($routeString, $routeIdentifier) || ($routeIdentifier->getRegularExpression() !== null && preg_match('/' . $routeIdentifier->getRegularExpression() . '/', $routeString, $variables))) {
                     if (isset($variables)) {
                         $arguments = array_combine($routeIdentifier->getArguments(), array_slice($variables, 1));
                     } else {
