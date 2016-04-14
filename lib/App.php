@@ -76,7 +76,7 @@
             $response = $this->response;
 
             try {
-                $routeMatch = $this->router->getMatchingRoute($this->request->getParameter('route'));
+                $routeMatch = $this->router->getMatchingRoute(trim($this->request->getParameter('route'), '/'));
                 $this->creator->registerClassResource($routeMatch->getArguments());
                 $route = $routeMatch->getRoute();
 
