@@ -4,6 +4,7 @@
     
     use Slimmer\HeaderContainer;
     use Slimmer\Interfaces\Hookable;
+    use Slimmer\Request;
     use Slimmer\Response;
     use Slimmer\Route;
 
@@ -29,19 +30,19 @@
             $allowed = [];
 
             if ($this->route->supportsHook(Hookable::HOOK_HTTP_GET)) {
-                $allowed[] = 'GET';
+                $allowed[] = Request::GET;
             }
 
             if ($this->route->supportsHook(Hookable::HOOK_HTTP_POST)) {
-                $allowed[] = 'POST';
+                $allowed[] = Request::POST;
             }
 
             if ($this->route->supportsHook(Hookable::HOOK_HTTP_PUT)) {
-                $allowed[] = 'PUT';
+                $allowed[] = Request::PUT;
             }
 
             if ($this->route->supportsHook(Hookable::HOOK_HTTP_DELETE)) {
-                $allowed[] = 'DELETE';
+                $allowed[] = Request::DELETE;
             }
 
             $response->getHeaderContainer()->setHeader('Allow', implode(', ', $allowed));
