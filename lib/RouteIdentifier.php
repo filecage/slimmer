@@ -30,6 +30,13 @@
         /**
          * @return string
          */
+        function getAsString () {
+            return $this->routeIdentifierString;
+        }
+
+        /**
+         * @return string
+         */
         function getRegularExpression () {
             return $this->regularExpression;
         }
@@ -47,14 +54,20 @@
          * @return $this
          */
         private function parseIdentifier ($identifier) {
-            $this->regularExpression = str_replace('/', '\/', preg_replace_callback('/{(.+)}/', function($matches){
+            $regularExpression = preg_replace_callback('/{(.+)}/', function($matches){
                 $definition = array_pop($matches);
                 preg_match('/^([^A-Za-z0-9_]+)([A-Za-z0-9_]+)$/', $definition, $matches);
 
                 $this->arguments[] = array_pop($matches);
 
                 return array_pop($matches);
-            }, $identifier));
+            }, $identifier);
+
+            if ($regularExpression === $identifier) {
+                return $this;
+            }
+
+            $this->regularExpression = str_replace('/', '\/', $regularExpression);
 
             return $this;
         }

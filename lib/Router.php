@@ -80,15 +80,26 @@
             foreach ($this->routes as $routeIdentifier => $route) {
                 $routeIdentifier = new RouteIdentifier($routeIdentifier);
 
-                if ($routeString === $routeIdentifier || preg_match('/' . $routeIdentifier->getRegularExpression() . '/', $routeString, $variables)) {
+                if ($this->isDirectMatch($routeString, $routeIdentifier) || preg_match('/' . $routeIdentifier->getRegularExpression() . '/', $routeString, $variables)) {
                     if (isset($variables)) {
                         $arguments = array_combine($routeIdentifier->getArguments(), array_slice($variables, 1));
+                        var_dump($arguments);
                     }
                     return $route;
                 }
             }
 
             throw new NotFound;
+        }
+
+        /**
+         * @param string $routeString
+         * @param RouteIdentifier $identifier
+         *
+         * @return bool
+         */
+        protected function isDirectMatch ($routeString, RouteIdentifier $identifier) {
+            return !$identifier->getRegularExpression() && $routeString === $identifier->getAsString();
         }
 
         /**
