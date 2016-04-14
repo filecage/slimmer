@@ -66,6 +66,40 @@
         }
 
         /**
+         * @return Buffer
+         */
+        function getBody () {
+            $body = new Buffer();
+            if (!$this->isPost()) {
+                return $body;
+            }
+
+            $bodyRaw = $this->getBodyRaw();
+            switch ($this->getContentType()) {
+                case self::CONTENT_TYPE_JSON:
+                    $content = json_decode($bodyRaw, true);
+                    break;
+
+                case self::CONTENT_TYPE_URLENCODED:
+                    parse_str($bodyRaw, $content);
+                    break;
+            }
+
+            if (!empty($content)) {
+                $body->setContent($content);
+            }
+
+            return $body;
+        }
+
+        /**
+         * @return string
+         */
+        function getBodyRaw () {
+            return file_get_contents('php://input');
+        }
+
+        /**
          * @return bool
          */
         function isGet() {
