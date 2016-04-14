@@ -5,6 +5,7 @@
     class HeaderContainer {
 
         const HTTP_STATUS_SUCCESS = 200;
+        const HTTP_STATUS_SUCCESS_NOCONTENT = 204;
         const HTTP_STATUS_REDIRECT_MOVED_PERMANENTLY = 301;
         const HTTP_STATUS_REDIRECT_FOUND = 302;
         const HTTP_STATUS_REDIRECT_SEE_OTHER = 303;
