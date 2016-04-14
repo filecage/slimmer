@@ -101,7 +101,7 @@
          * @return bool
          */
         protected function isDirectMatch ($routeString, RouteIdentifier $identifier) {
-            return !$identifier->getRegularExpression() && $routeString === $identifier->getAsString();
+            return !$identifier->getRegularExpression() && $routeString == $identifier->getAsString();
         }
 
         /**
