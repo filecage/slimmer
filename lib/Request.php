@@ -9,7 +9,11 @@
         const PUT    = 'PUT';
         const DELETE = 'DELETE';
 
+        const CONTENT_TYPE_JSON = 'application/json';
+        const CONTENT_TYPE_URLENCODED = 'application/x-www-form-urlencoded';
+
         const ENVIRONMENT_KEY_METHOD = 'REQUEST_METHOD';
+        const ENVIRONMENT_KEY_CONTENT_TYPE = 'CONTENT_TYPE';
 
         /**
          * @var array
@@ -42,6 +46,13 @@
          */
         function getMethod() {
             return (!empty($this->environment[self::ENVIRONMENT_KEY_METHOD])) ? $this->environment[self::ENVIRONMENT_KEY_METHOD] : null;
+        }
+
+        /**
+         * @return string
+         */
+        function getContentType () {
+            return (!empty($this->environment[self::ENVIRONMENT_KEY_CONTENT_TYPE])) ? $this->environment[self::ENVIRONMENT_KEY_CONTENT_TYPE] : null;
         }
 
         /**
