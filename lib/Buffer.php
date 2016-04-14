@@ -2,6 +2,8 @@
 
     namespace Slimmer;
 
+    use Slimmer\Exceptions\SlimmerException;
+
     class Buffer {
 
         /**
@@ -68,7 +70,7 @@
          * @param Buffer $mergeBuffer
          *
          * @return $this
-         * @throws \Exception
+         * @throws SlimmerException
          */
         function mergeContents (Buffer $mergeBuffer) {
             if (!$mergeBuffer->hasContent()) {
@@ -81,7 +83,7 @@
             } elseif (is_string($mergeContent) && is_string($this->content)) {
                 $this->content = $this->content . "\n" . $mergeContent;
             } else {
-                throw new \Exception('Unable to merge buffers, unmergeable buffer content types; please keep buffer writing consistent!');
+                throw new SlimmerException('Unable to merge buffers, unmergeable buffer content types; please keep buffer writing consistent!');
             }
 
             return $this;
