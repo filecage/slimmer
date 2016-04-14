@@ -9,7 +9,7 @@
     class Router {
 
         /**
-         * @var array
+         * @var Route[]
          */
         private $routes = [];
 
@@ -73,7 +73,7 @@
         /**
          * @param string $routeString
          *
-         * @return Route
+         * @return RouteMatch
          * @throws NotFound
          */
         function getMatchingRoute ($routeString) {
@@ -83,8 +83,11 @@
                 if ($this->isDirectMatch($routeString, $routeIdentifier) || preg_match('/' . $routeIdentifier->getRegularExpression() . '/', $routeString, $variables)) {
                     if (isset($variables)) {
                         $arguments = array_combine($routeIdentifier->getArguments(), array_slice($variables, 1));
+                    } else {
+                        $arguments = [];
                     }
-                    return $route;
+
+                    return new RouteMatch($route, new Arguments($arguments));
                 }
             }
 

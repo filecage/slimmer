@@ -76,7 +76,10 @@
             $response = $this->response;
 
             try {
-                $route = $this->router->getMatchingRoute($this->request->getParameter('route'));
+                $routeMatch = $this->router->getMatchingRoute($this->request->getParameter('route'));
+                $this->creator->registerClassResource($routeMatch->getArguments());
+                $route = $routeMatch->getRoute();
+
                 $httpHook = $this->getHttpHookByHttpMethod();
                 if (!$route->supportsHook($httpHook)) {
                     throw new MethodNotAllowed($route);
