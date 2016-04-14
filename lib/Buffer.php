@@ -78,7 +78,9 @@
             }
 
             $mergeContent = $mergeBuffer->getContent();
-            if (is_array($mergeContent) && is_array($this->content)) {
+            if (!$this->hasContent()) {
+                $this->content = $mergeContent;
+            } elseif (is_array($mergeContent) && is_array($this->content)) {
                 $this->content = array_merge($mergeContent, $this->content);
             } elseif (is_string($mergeContent) && is_string($this->content)) {
                 $this->content = $this->content . "\n" . $mergeContent;
