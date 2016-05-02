@@ -96,7 +96,7 @@
          * @return mixed
          */
         private function getHookMethodName ($hook) {
-            return sprintf('%sHook', $hook);
+            return sprintf('%sHook', Util::transformStringToCamelCase($hook, ':'));
         }
 
         /**
