@@ -109,6 +109,10 @@
                 $this->contentConverter->convert($response);
             }
 
+            if (!$response->getBody()->hasContent()) {
+                $response->getHeaderContainer()->setStatus(HeaderContainer::HTTP_STATUS_SUCCESS_NOCONTENT);
+            }
+
             $this->setHeaders($response->getHeaderContainer())
                 ->setContent($response->getBody());
 
