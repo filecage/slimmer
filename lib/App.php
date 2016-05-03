@@ -155,6 +155,8 @@
                 return Hookable::HOOK_HTTP_PUT;
             } elseif ($this->request->isDelete()) {
                 return Hookable::HOOK_HTTP_DELETE;
+            } elseif ($this->request->isOptions()) {
+                return Hookable::HOOK_HTTP_OPTIONS;
             }
 
             throw new NotImplemented;

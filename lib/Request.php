@@ -4,10 +4,11 @@
 
     class Request {
 
-        const GET    = 'GET';
-        const POST   = 'POST';
-        const PUT    = 'PUT';
+        const GET = 'GET';
+        const POST = 'POST';
+        const PUT = 'PUT';
         const DELETE = 'DELETE';
+        const OPTIONS = 'OPTIONS';
 
         const CONTENT_TYPE_JSON = 'application/json';
         const CONTENT_TYPE_URLENCODED = 'application/x-www-form-urlencoded';
@@ -125,6 +126,13 @@
          */
         function isDelete() {
             return $this->getMethod() == self::DELETE;
+        }
+
+        /**
+         * @return bool
+         */
+        function isOptions() {
+            return $this->getMethod() == self::OPTIONS;
         }
 
     }
