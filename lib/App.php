@@ -87,6 +87,8 @@
 
                 $route->injectCreator($this->creator)
                     ->callHook($httpHook, $response);
+
+                $route->callHook('slimmer:beforeSend', $response);
             } catch (\Exception $e) {
                 if (!$e instanceof SlimmerException) {
                     $e = SlimmerException::convertFromGenericException($e);
