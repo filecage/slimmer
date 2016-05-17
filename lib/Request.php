@@ -27,6 +27,11 @@
         private $environment;
 
         /**
+         * @var ContentType
+         */
+        private $contentType;
+
+        /**
          * @param array $data
          * @param array $environment
          */
@@ -53,7 +58,11 @@
          * @return string
          */
         function getContentType () {
-            return (!empty($this->environment[self::ENVIRONMENT_KEY_CONTENT_TYPE])) ? $this->environment[self::ENVIRONMENT_KEY_CONTENT_TYPE] : null;
+            if (!isset($this->contentType)) {
+                $this->contentType = ContentType::createFromString(!empty($this->environment[self::ENVIRONMENT_KEY_CONTENT_TYPE]) ? $this->environment[self::ENVIRONMENT_KEY_CONTENT_TYPE] : null);
+            }
+
+            return $this->contentType;
         }
 
         /**
