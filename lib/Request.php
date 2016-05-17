@@ -55,7 +55,7 @@
         }
 
         /**
-         * @return string
+         * @return ContentType
          */
         function getContentType () {
             if (!isset($this->contentType)) {
