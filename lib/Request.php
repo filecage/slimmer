@@ -85,7 +85,7 @@
             }
 
             $bodyRaw = $this->getBodyRaw();
-            switch ($this->getContentType()) {
+            switch ($this->getContentType()->getType()) {
                 case self::CONTENT_TYPE_JSON:
                     $content = json_decode($bodyRaw, true);
                     break;
