@@ -67,6 +67,29 @@
         }
 
         /**
+         * @param string $index
+         *
+         * @return bool
+         */
+        function hasIndex ($index) {
+            return isset($this->content[$index]);
+        }
+
+        /**
+         * @param string $index
+         * @param mixed $default
+         *
+         * @return mixed
+         */
+        function getIndex ($index, $default = null) {
+            if (!$this->hasIndex($index)) {
+                return $default;
+            }
+
+            return $this->content[$index];
+        }
+
+        /**
          * @param Buffer $mergeBuffer
          *
          * @return $this
