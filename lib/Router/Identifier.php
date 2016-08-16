@@ -15,7 +15,7 @@
         private $regularExpression;
 
         /**
-         * @var string
+         * @var array
          */
         private $arguments = [];
 
@@ -42,7 +42,7 @@
         }
 
         /**
-         * @return string
+         * @return array
          */
         function getArguments () {
             return $this->arguments;
