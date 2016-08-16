@@ -48,7 +48,7 @@
          * @return Arguments
          */
         function getArguments () {
-            return $this->arguments ?? new Arguments();
+            return isset($this->arguments) ? $this->arguments : new Arguments();
         }
 
         /**
