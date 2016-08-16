@@ -5,7 +5,7 @@
     $app = new \Slimmer\App();
 
     $app->getRouter()
-        ->registerGetHandler('/hello/{(.*)variable}', function (\Slimmer\Buffer $buffer, \Slimmer\Arguments $arguments) {
+        ->registerGetHandler('/hello/{(.*)variable}', function (\Slimmer\Buffer $buffer, \Slimmer\Router\Arguments $arguments) {
             $buffer->hello = 'world';
             $buffer->timestamp = time();
             $buffer->variable = $arguments->get('variable');
