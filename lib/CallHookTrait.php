@@ -79,7 +79,7 @@
          * @param string $hook
          * @param Response $response
          *
-         * @return $this|null
+         * @return Buffer
          */
         private function callHookFromClassBody ($hook, Response $response) {
             $hookMethodName = $this->getHookMethodName($hook);
@@ -103,7 +103,7 @@
          * @param callable $hookCallable
          * @param Response $response
          *
-         * @return $this
+         * @return Buffer
          * @throws \Exception
          */
         private function callHookWithCallable (callable $hookCallable, Response $response) {
