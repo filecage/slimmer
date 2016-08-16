@@ -24,7 +24,6 @@
          */
         function __construct($routeIdentifierString) {
             $this->routeIdentifierString = $routeIdentifierString;
-            $this->parseIdentifier($routeIdentifierString);
         }
 
         /**
@@ -38,6 +37,10 @@
          * @return string
          */
         function getRegularExpression () {
+            if (!isset($this->regularExpression)) {
+                $this->parseIdentifier();
+            }
+
             return $this->regularExpression;
         }
 
@@ -45,15 +48,17 @@
          * @return array
          */
         function getArguments () {
+            if (!isset($this->arguments)) {
+                $this->parseIdentifier();
+            }
+            
             return $this->arguments;
         }
 
         /**
-         * @param $identifier
-         *
          * @return $this
          */
-        private function parseIdentifier ($identifier) {
+        private function parseIdentifier () {
             $regularExpression = preg_replace_callback('/{(.+)}/', function($matches){
                 $definition = array_pop($matches);
                 preg_match('/^([^A-Za-z0-9_]+)([A-Za-z0-9_]+)$/', $definition, $matches);
@@ -61,9 +66,9 @@
                 $this->arguments[] = array_pop($matches);
 
                 return array_pop($matches);
-            }, $identifier);
+            }, $this->routeIdentifierString);
 
-            if ($regularExpression === $identifier) {
+            if ($regularExpression === $this->routeIdentifierString) {
                 return $this;
             }
 
