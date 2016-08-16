@@ -1,7 +1,9 @@
 <?php
     
-    namespace Slimmer;
+    namespace Slimmer\Router;
 
+    use Slimmer\CallHookTrait;
+    use Slimmer\CreatorInjectionTrait;
     use Slimmer\Interfaces\Hookable;
 
     class Route implements Hookable {

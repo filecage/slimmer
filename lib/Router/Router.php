@@ -1,6 +1,6 @@
 <?php
 
-    namespace Slimmer;
+    namespace Slimmer\Router;
 
     use Slimmer\Exceptions\Http\NotFound;
     use Slimmer\Exceptions\SlimmerException;
@@ -55,12 +55,12 @@
 
         /**
          * @param $routeIdentifier
-         * @param Route $route
+         * @param $route
          *
          * @return $this
          * @throws SlimmerException
          */
-        function registerRoute($routeIdentifier, Route $route) {
+        function registerRoute($routeIdentifier, $route) {
             if (isset($this->routes[$routeIdentifier])) {
                 throw new SlimmerException('Multiple routes defined for route identifier "' . $routeIdentifier . '"');
             }
@@ -73,35 +73,18 @@
         /**
          * @param string $routeString
          *
-         * @return RouteMatch
+         * @return Routing
          * @throws NotFound
          */
         function getMatchingRoute ($routeString) {
             foreach ($this->routes as $routeIdentifier => $route) {
-                $routeIdentifier = new RouteIdentifier($routeIdentifier);
-
-                if ($this->isDirectMatch($routeString, $routeIdentifier) || ($routeIdentifier->getRegularExpression() !== null && preg_match('/' . $routeIdentifier->getRegularExpression() . '/', $routeString, $variables))) {
-                    if (isset($variables)) {
-                        $arguments = array_combine($routeIdentifier->getArguments(), array_slice($variables, 1));
-                    } else {
-                        $arguments = [];
-                    }
-
-                    return new RouteMatch($route, new Arguments($arguments));
+                $routing = new Routing($route, $routeIdentifier);
+                if ($routing->matches($routeString)) {
+                    return $routing;
                 }
             }
 
             throw new NotFound;
-        }
-
-        /**
-         * @param string $routeString
-         * @param RouteIdentifier $identifier
-         *
-         * @return bool
-         */
-        protected function isDirectMatch ($routeString, RouteIdentifier $identifier) {
-            return !$identifier->getRegularExpression() && $routeString == $identifier->getAsString();
         }
 
         /**

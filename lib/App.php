@@ -8,6 +8,7 @@
     use Slimmer\Exceptions\SlimmerException;
     use Slimmer\Interfaces\ContentConverterInterface;
     use Slimmer\Interfaces\Hookable;
+    use Slimmer\Router\Router;
 
     class App {
 

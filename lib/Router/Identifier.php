@@ -1,8 +1,8 @@
 <?php
 
-    namespace Slimmer;
+    namespace Slimmer\Router;
 
-    class RouteIdentifier {
+    class Identifier {
 
         /**
          * @var string
