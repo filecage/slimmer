@@ -39,11 +39,12 @@
 
         /**
          * @param Creator $creator
+         * @param ContentConverterInterface $contentConverter
          */
-        function __construct (Creator $creator = null) {
+        function __construct (Creator $creator = null, ContentConverterInterface $contentConverter = null) {
             $this->request = new Request($_REQUEST, $_SERVER);
             $this->response = new Response();
-            $this->contentConverter = new JsonContentConverter();
+            $this->contentConverter = $contentConverter ?: new JsonContentConverter();
 
             $this->creator = $creator ?: new Creator();
             $this->creator->registerClassResource($this->request);
