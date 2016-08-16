@@ -20,7 +20,7 @@
         private $arguments = [];
 
         /**
-         * @param $routeIdentifierString
+         * @param string $routeIdentifierString
          */
         function __construct($routeIdentifierString) {
             $this->routeIdentifierString = $routeIdentifierString;
