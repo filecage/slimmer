@@ -73,7 +73,7 @@
                 return $this;
             }
 
-            $this->regularExpression = str_replace('/', '\/', $regularExpression);
+            $this->regularExpression = str_replace('/', '\/', trim($regularExpression, '/'));
 
             return $this;
         }
