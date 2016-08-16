@@ -17,7 +17,7 @@
         /**
          * @var array
          */
-        private $arguments = [];
+        private $arguments;
 
         /**
          * @param string $routeIdentifierString
@@ -51,7 +51,7 @@
             if (!isset($this->arguments)) {
                 $this->parseIdentifier();
             }
-            
+
             return $this->arguments;
         }
 
@@ -59,6 +59,7 @@
          * @return $this
          */
         private function parseIdentifier () {
+            $this->arguments = [];
             $regularExpression = preg_replace_callback('/{(.+)}/', function($matches){
                 $definition = array_pop($matches);
                 preg_match('/^([^A-Za-z0-9_]+)([A-Za-z0-9_]+)$/', $definition, $matches);
