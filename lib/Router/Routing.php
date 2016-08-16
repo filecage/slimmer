@@ -61,7 +61,7 @@
                 return true;
             }
 
-            if ($this->identifier->getRegularExpression() !== null && preg_match('/' . $this->identifier->getRegularExpression() . '/', $routeString, $variables)) {
+            if ($this->identifier->getRegularExpression() !== null && preg_match('/^' . $this->identifier->getRegularExpression() . '$/', $routeString, $variables)) {
                 $this->arguments = new Arguments(array_combine($this->identifier->getArguments(), array_slice($variables, 1)));
 
                 return true;
