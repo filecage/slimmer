@@ -2,8 +2,8 @@
     
     namespace Slimmer\Router;
 
-    use Slimmer\CallHookTrait;
-    use Slimmer\CreatorInjectionTrait;
+    use Slimmer\Helper\CallHookTrait;
+    use Slimmer\Helper\CreatorInjectionTrait;
     use Slimmer\Interfaces\CreatorInjectable;
     use Slimmer\Interfaces\Hookable;
 
