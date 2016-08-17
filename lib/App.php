@@ -124,6 +124,10 @@
          */
         private function callHook ($hook) {
             foreach ($this->callStack as $hookable) {
+                if (!$hookable->supportsHook($hook)) {
+                    continue;
+                }
+
                 if ($hookable instanceof CreatorInjectable) {
                     $hookable->injectCreator($this->creator);
                 }
