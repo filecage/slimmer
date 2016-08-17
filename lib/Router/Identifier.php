@@ -62,7 +62,7 @@
             $this->arguments = [];
             $regularExpression = preg_replace_callback('/{(.+)}/', function($matches){
                 $definition = array_pop($matches);
-                preg_match('/^([^A-Za-z0-9_]+)([A-Za-z0-9_]+)$/', $definition, $matches);
+                preg_match('/^([^#]+)#([A-Za-z0-9_]+)$/', $definition, $matches);
 
                 $this->arguments[] = array_pop($matches);
 
