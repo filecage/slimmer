@@ -22,4 +22,11 @@
          */
         function callHook($hook, Response $buffer);
 
+        /**
+         * @param string $hook
+         *
+         * @return bool
+         */
+        function supportsHook ($hook);
+
     }
