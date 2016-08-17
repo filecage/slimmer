@@ -8,6 +8,7 @@
     use Slimmer\Exceptions\SlimmerException;
     use Slimmer\Http\Http;
     use Slimmer\Interfaces\ContentConverterInterface;
+    use Slimmer\Interfaces\CreatorInjectable;
     use Slimmer\Interfaces\Hookable;
     use Slimmer\Router\Router;
 
@@ -34,11 +35,17 @@
         private $contentConverter;
 
         /**
+         * @var CallStack
+         */
+        private $callStack;
+
+        /**
          * @param Creator $creator
          * @param ContentConverterInterface $contentConverter
          */
         function __construct (Creator $creator = null, ContentConverterInterface $contentConverter = null) {
             $this->http = new Http();
+            $this->callStack = new CallStack();
 
             $this->creator = $creator ?: new Creator();
             $this->creator->registerClassResource($this->http->getRequest());
@@ -53,6 +60,17 @@
          */
         function getRouter () {
             return $this->router;
+        }
+
+        /**
+         * @param Hookable $middleware
+         *
+         * @return $this
+         */
+        function addMiddleware (Hookable $middleware) {
+            $this->callStack->appendHookable($middleware);
+
+            return $this;
         }
 
         /**
@@ -82,10 +100,11 @@
                     throw new MethodNotAllowed($route);
                 }
 
-                $route->injectCreator($this->creator)
-                    ->callHook($httpHook, $response);
+                $this->callStack->appendHookable($route)
+                    ->lock();
 
-                $route->callHook('slimmer:beforeSend', $response);
+                $this->callHook($httpHook)
+                     ->callHook('slimmer:beforeSend');
             } catch (\Exception $e) {
                 if (!$e instanceof SlimmerException) {
                     $e = SlimmerException::convertFromGenericException($e);
@@ -94,6 +113,23 @@
             }
 
             $this->http->send($response, $this->contentConverter);
+
+            return $this;
+        }
+
+        /**
+         * @param string $hook
+         *
+         * @return $this
+         */
+        private function callHook ($hook) {
+            foreach ($this->callStack as $hookable) {
+                if ($hookable instanceof CreatorInjectable) {
+                    $hookable->injectCreator($this->creator);
+                }
+
+                $hookable->callHook($hook, $this->http->getResponse());
+            }
 
             return $this;
         }

@@ -3,6 +3,7 @@
     namespace Slimmer;
 
     use Creator\Creator;
+    use Slimmer\Exceptions\SlimmerException;
     use Slimmer\Interfaces\Hookable;
 
     class CallStack implements \Iterator {
@@ -21,8 +22,13 @@
          * @param Hookable $hookable
          *
          * @return $this
+         * @throws SlimmerException
          */
         function appendHookable (Hookable $hookable) {
+            if ($this->locked) {
+                throw new SlimmerException('Can not append hookable to CallStack after it has been locked');
+            }
+
             $this->stack[] = $hookable;
 
             return $this;
