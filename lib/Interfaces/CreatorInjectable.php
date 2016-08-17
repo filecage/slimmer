@@ -1,6 +1,6 @@
 <?php
 
-    namespace Slimmer;
+    namespace Slimmer\Interfaces;
 
     use Creator\Creator;
 
