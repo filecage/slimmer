@@ -64,9 +64,10 @@
                 $definition = array_pop($matches);
                 preg_match('/^([A-Za-z0-9_]+)#([^#]+)$/', $definition, $matches);
 
+                $regex = array_pop($matches);
                 $this->arguments[] = array_pop($matches);
 
-                return array_pop($matches);
+                return $regex;
             }, $this->routeIdentifierString);
 
             if ($regularExpression === $this->routeIdentifierString) {
