@@ -12,6 +12,8 @@
         const HOOK_HTTP_DELETE = 'http:delete';
         const HOOK_HTTP_OPTIONS = 'http:options';
 
+        const HOOK_SLIMMER_BEFORESEND = 'slimmer:beforeSend';
+
         /**
          * @param $hook
          * @param Response $buffer

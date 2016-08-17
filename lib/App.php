@@ -104,7 +104,7 @@
                     ->lock();
 
                 $this->callHook($httpHook)
-                     ->callHook('slimmer:beforeSend');
+                     ->callHook(Hookable::HOOK_SLIMMER_BEFORESEND);
             } catch (\Exception $e) {
                 if (!$e instanceof SlimmerException) {
                     $e = SlimmerException::convertFromGenericException($e);
