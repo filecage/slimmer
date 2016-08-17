@@ -13,6 +13,7 @@
         const HOOK_HTTP_OPTIONS = 'http:options';
 
         const HOOK_SLIMMER_BEFORESEND = 'slimmer:beforeSend';
+        const HOOK_SLIMMER_BEFOREROUTING = 'slimmer:beforeRouting';
 
         /**
          * @param $hook
