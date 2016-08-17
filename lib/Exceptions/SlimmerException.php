@@ -3,8 +3,8 @@
     namespace Slimmer\Exceptions;
 
     use Slimmer\Buffer;
-    use Slimmer\HeaderContainer;
-    use Slimmer\Response;
+    use Slimmer\Http\HeaderContainer;
+    use Slimmer\Http\Response;
 
     class SlimmerException extends \Exception {
 

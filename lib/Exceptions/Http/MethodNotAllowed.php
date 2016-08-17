@@ -2,11 +2,11 @@
     
     namespace Slimmer\Exceptions\Http;
     
-    use Slimmer\HeaderContainer;
+    use Slimmer\Http\HeaderContainer;
     use Slimmer\Interfaces\Hookable;
-    use Slimmer\Request;
-    use Slimmer\Response;
-    use Slimmer\Route;
+    use Slimmer\Http\Request;
+    use Slimmer\Http\Response;
+    use Slimmer\Router\Route;
 
     class MethodNotAllowed extends HttpException {
         const HTTP_STATUS = HeaderContainer::HTTP_STATUS_METHOD_NOT_ALLOWED;

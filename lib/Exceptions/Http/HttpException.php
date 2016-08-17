@@ -3,7 +3,7 @@
     namespace Slimmer\Exceptions\Http;
 
     use Slimmer\Exceptions\SlimmerException;
-    use Slimmer\HeaderContainer;
+    use Slimmer\Http\HeaderContainer;
 
     abstract class HttpException extends SlimmerException {
         const HTTP_STATUS = HeaderContainer::HTTP_STATUS_SERVER_ERROR;
