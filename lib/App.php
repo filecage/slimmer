@@ -85,15 +85,17 @@
         }
 
         /**
+         * @param null $route
+         *
          * @return $this
          */
-        function run () {
+        function run ($route = null) {
             $response = $this->http->getResponse();
 
             try {
                 $this->callHook(Hookable::HOOK_SLIMMER_BEFOREROUTING);
 
-                $routeMatch = $this->router->getMatchingRoute(trim($this->http->getRequest()->getParameter('route'), '/'));
+                $routeMatch = $this->router->getMatchingRoute(trim($route ?: $this->http->getRequest()->getParameter('route'), '/'));
                 $this->creator->registerClassResource($routeMatch->getArguments());
                 $route = $routeMatch->getRoute();
 
