@@ -63,12 +63,12 @@
         }
 
         /**
-         * @param Hookable $middleware
+         * @param Hookable $hookable
          *
          * @return $this
          */
-        function addMiddleware (Hookable $middleware) {
-            $this->callStack->appendHookable($middleware);
+        function addHookable (Hookable $hookable) {
+            $this->callStack->appendHookable($hookable);
 
             return $this;
         }
