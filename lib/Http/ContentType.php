@@ -1,6 +1,6 @@
 <?php
 
-    namespace Slimmer;
+    namespace Slimmer\Http;
 
     class ContentType {
 

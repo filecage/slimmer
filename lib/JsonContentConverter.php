@@ -2,6 +2,7 @@
 
     namespace Slimmer;
 
+    use Slimmer\Http\Response;
     use Slimmer\Interfaces\ContentConverterInterface;
 
     class JsonContentConverter implements ContentConverterInterface {

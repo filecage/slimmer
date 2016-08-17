@@ -3,6 +3,7 @@
     namespace Slimmer;
     
     use Creator\Creator;
+    use Slimmer\Http\Response;
 
     trait CallHookTrait {
 

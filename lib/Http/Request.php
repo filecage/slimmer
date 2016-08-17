@@ -1,6 +1,8 @@
 <?php
 
-    namespace Slimmer;
+    namespace Slimmer\Http;
+
+    use Slimmer\Buffer;
 
     class Request {
 

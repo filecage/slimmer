@@ -2,7 +2,7 @@
 
     namespace Slimmer\Interfaces;
 
-    use Slimmer\Response;
+    use Slimmer\Http\Response;
 
     interface Hookable {
 
