@@ -10,7 +10,7 @@
     ],
     "require": {
         "php": ">=7.0",
-        "tholabs/creator": "^0.4.1"
+        "tholabs/creator": ">=0.4.1 <1.0"
     },
     "autoload": {
         "psr-4": {
