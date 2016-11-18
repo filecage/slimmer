@@ -4,6 +4,7 @@
     
     use Creator\Creator;
     use Slimmer\Buffer;
+    use Slimmer\Util;
     use Slimmer\Http\Response;
 
     trait CallHookTrait {
