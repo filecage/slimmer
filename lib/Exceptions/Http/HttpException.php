@@ -27,11 +27,10 @@
          *
          * @return HttpException
          */
-        function withExceptionOutput (array $exceptionOutput) : HttpException {
-            $clone = clone $this;
-            $clone->exceptionOutput = $exceptionOutput;
+        function setExceptionOutput (array $exceptionOutput) : HttpException {
+            $this->exceptionOutput = $exceptionOutput;
 
-            return $clone;
+            return $this;
         }
 
         /**
