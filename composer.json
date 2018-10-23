@@ -8,7 +8,7 @@
         }
     ],
     "require": {
-        "php": ">=7.0",
+        "php": ">=7.1",
         "tholabs/creator": "^0.4.1"
     },
     "autoload": {
