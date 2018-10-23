@@ -9,12 +9,29 @@
         const HTTP_STATUS = HeaderContainer::HTTP_STATUS_SERVER_ERROR;
 
         /**
+         * @var array
+         */
+        protected $exceptionOutput;
+
+        /**
          * Theres no exception output for HTTP exceptions
          *
          * @return null
          */
-        function getExceptionOutput () {
-            return null;
+        function getExceptionOutput () : ?array {
+            return $this->exceptionOutput ?? null;
+        }
+
+        /**
+         * @param array $exceptionOutput
+         *
+         * @return HttpException
+         */
+        function withExceptionOutput (array $exceptionOutput) : HttpException {
+            $clone = clone $this;
+            $clone->exceptionOutput = $exceptionOutput;
+
+            return $clone;
         }
 
         /**
