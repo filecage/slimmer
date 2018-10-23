@@ -1,7 +1,6 @@
 {
     "name": "tholabs/slimmer",
     "description": "PHP nano-framework",
-    "version": "1.0.0-dev",
     "authors": [
         {
             "name": "David Beuchert",
